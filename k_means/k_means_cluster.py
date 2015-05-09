@@ -50,16 +50,20 @@ data_dict.pop("TOTAL", 0)
 feature_1 = "salary"
 feature_2 = "exercised_stock_options"
 poi  = "poi"
-features_list = [poi, feature_1, feature_2]
+features_list = [poi, feature_1, feature_2, 'total_payments']
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
 
+ex_stock_options = featureFormat(data_dict, ['exercised_stock_options'])
+print ('max= ', ex_stock_options.max(), 'min= ', ex_stock_options.min())
 
+salaries = featureFormat(data_dict, ['salary'])
+print ('max= ', salaries.max(), 'min= ', salaries.min())
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
-### for f1, f2, _ in finance_features:
+for f1, f2, _ in finance_features:
 ### (as it's currently written, line below assumes 2 features)
-for f1, f2 in finance_features:
+#for f1, f2 in finance_features:
     plt.scatter( f1, f2 )
 plt.show()
 
@@ -76,7 +80,6 @@ Draw(pred, finance_features, poi, name="clusters_before_scaling.pdf", f1_name=fe
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
 try:
     Draw(pred, finance_features, poi, mark_poi=False, name="clusters.pdf", f1_name=feature_1, f2_name=feature_2)
 except NameError:
