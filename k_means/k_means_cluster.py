@@ -77,6 +77,13 @@ clf = KMeans(n_clusters=2)
 pred = clf.fit_predict( finance_features )
 Draw(pred, finance_features, poi, name="clusters_before_scaling.pdf", f1_name=feature_1, f2_name=feature_2)
 
+from sklearn import preprocessing
+min_max_scaler = preprocessing.MinMaxScaler()
+scaled_stocks = min_max_scaler.fit_transform(featureFormat(data_dict, ['exercised_stock_options']))
+scaled_salaries = min_max_scaler.fit_transform(featureFormat(data_dict, ['salary']))
+
+print (1000000 - ex_stock_options.min()) / (ex_stock_options.max() - ex_stock_options.min())
+print (200000 - salaries.min()) / (salaries.max() - salaries.min())
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
