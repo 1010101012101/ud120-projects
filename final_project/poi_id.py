@@ -10,7 +10,8 @@ from tester import test_classifier, dump_classifier_and_data
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary'] # You will need to use more features
+features_list = ['poi', 'salary', 'deferral_payments', 'total_payments', 'bonus', 'deferred_income', 'total_stock_value', 'expenses', 'director_fees'] # You will need to use more features
+
 
 ### Load the dictionary containing the dataset
 data_dict = pickle.load(open("final_project_dataset.pkl", "r") )
@@ -31,7 +32,14 @@ labels, features = targetFeatureSplit(data)
 ### http://scikit-learn.org/stable/modules/pipeline.html
 
 from sklearn.naive_bayes import GaussianNB
-clf = GaussianNB()    # Provided to give you a starting point. Try a varity of classifiers.
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+
+#clf = GaussianNB()    # Provided to give you a starting point. Try a varity of classifiers.
+#clf = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1)
+clf = AdaBoostClassifier()
+
+
+
 
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
 ### using our testing script.
